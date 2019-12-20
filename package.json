@@ -1,0 +1,96 @@
+{
+  "name": "PS-Dashboard",
+  "productName": "NCS PS-Dashboard",
+  "version": "0.0.1-alpha",
+  "description": "Northland Controls Professional Services Dashboard for Lenel. Still in development.",
+  "main": ".webpack/main",
+  "scripts": {
+    "start": "electron-forge start",
+    "start-debug": "electron-forge start --inspect-electron",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "build": "webpack --mode=development",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "author": {
+    "name": "Santiago Loane",
+    "email": "sloane@northlandcontrols.com"
+  },
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "ps_dashboard"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ],
+      "plugins": [
+        [
+          "@electron-forge/plugin-webpack",
+          {
+            "mainConfig": "./webpack.main.config.js",
+            "renderer": {
+              "config": "./webpack.renderer.config.js",
+              "entryPoints": [
+                {
+                  "html": "./src/index.html",
+                  "js": "./src/renderer.js",
+                  "name": "main_window"
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
+  },
+  "dependencies": {
+    "@amcharts/amcharts4": "^4.7.14",
+    "app-root-path": "^3.0.0",
+    "bootstrap": "^4.4.1",
+    "electron-squirrel-startup": "^1.0.0",
+    "jquery": "^3.4.1",
+    "mssql": "^6.0.1",
+    "popper.js": "^1.16.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "6.0.0-beta.46",
+    "@electron-forge/maker-deb": "6.0.0-beta.46",
+    "@electron-forge/maker-rpm": "6.0.0-beta.46",
+    "@electron-forge/maker-squirrel": "6.0.0-beta.46",
+    "@electron-forge/maker-zip": "6.0.0-beta.46",
+    "@electron-forge/plugin-webpack": "6.0.0-beta.46",
+    "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "autoprefixer": "^9.7.3",
+    "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^3.3.0",
+    "electron": "7.1.4",
+    "exports-loader": "^0.7.0",
+    "node-loader": "^0.6.0",
+    "node-sass": "^4.13.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^0.23.1",
+    "webpack-cli": "^3.3.10"
+  }
+}

@@ -1,9 +1,12 @@
 {
-  "name": "PS-Dashboard",
-  "productName": "NCS PS-Dashboard",
+  "name": "ps-dashboard",
+  "productName": "ncs ps-dashboard",
   "version": "0.0.1-alpha",
   "description": "Northland Controls Professional Services Dashboard for Lenel. Still in development.",
   "main": ".webpack/main",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "start": "electron-forge start",
     "start-debug": "electron-forge start --inspect-electron",

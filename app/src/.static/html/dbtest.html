@@ -1,0 +1,31 @@
+<p> Result (result)</p>
+<div class="result" id="resultDiv">
+</div>
+
+<script>
+	const config = {server:'LMIL-US001337-1/MSSQLSERVER01',database:'AccessControl'};
+
+	var addConn = (async function() {
+		try {
+			console.log("success");
+			$('#resultDiv').html('WeDidIt');
+		} catch (err) {
+			console.log(err);
+			$('#resultDiv').html(err);
+		}
+	});
+
+	//$('#resultDiv').load(phpDir+'testquery.php');
+</script>
+
+
+<!--<script>
+$.ajax({
+  url: phpDir+'test.php',
+  success: function(data) {
+    $('#resultDiv').html(data);
+    console.log(data)
+    console.log("Done!")
+  }
+});
+</script>-->

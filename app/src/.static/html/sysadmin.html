@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+
+  <head>
+    <meta charset="UTF-8">
+    <base href="./">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.amcharts.com 'unsafe-inline'; img-src https://www.w3.org 'self' data: https:;">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Northland Controls professional services dashboard">
+    <meta name="keywords" content="Northland,Controls,Professional,Service,Services,PS,Dash,Dashboard,DB,Lenel,OnGuard">
+
+    <base href="/">
+
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+
+
+  <body>
+    <div id="mainBodyContainer" class="container">
+      <header>
+        <section id="navigation"></section>
+      </header>
+      <!-- line break -->
+      <p class="invisible">
+        &nbsp;
+      </p>
+      <section id="content"></section>
+      <section id="footer"></section>
+    </div>
+  </body>
+
+  <script>
+    window.$ = window.jquery = require("jquery");
+    window.popper = require("popper.js");
+    require("bootstrap");
+  </script>
+
+  <script>
+  	$('#navigation').load(htmlDir+'navigation.html')
+  	$('#content').load(htmlDir+'demo.html')
+  </script>
+  
+</html>

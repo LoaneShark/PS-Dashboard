@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-light rounded">
+	<a id="navbarIconLink" class="navbar-brand" href="#">
+		<img id="navbarIcon" width="20" height="30">
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_main" aria-controls="navbar_main" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbar_main">
+  	<div class="navbar-nav">
+		 <a id="loginNav" role="button" class="btn btn-nc-primary" onclick="pageLogin()">Login</a>&nbsp;
+		 <a id="sysadminNav" role="button" class="btn btn-nc-primary disabled" onclick="pageSysAdmin()" disabled>System Administration</a>&nbsp;
+		 <a id="dbtestNav" role="button" class="btn btn-nc-primary" onclick="pageDBTest()">DB Test</a>&nbsp;
+		 <a id="dbtestNav2" role="button" class="btn btn-nc-primary" onclick="pageDBTest2()">DB Test 2</a>&nbsp;
+		 <a id="charttestNav" role="button" class="btn btn-nc-primary" onclick="pageAMChartsTest()">Charts Demo</a>&nbsp;
+	</ul>
+  </div>
+</nav>
+
+<script>
+	const app = require('electron').remote.app;
+	var basepath = app.getAppPath()+"\\src";
+	console.log(basepath);
+	$('#navbarIcon').attr("src","/.static/img/northland-black-t.png");
+
+	//$('#homeNavLink').attr("href",basepath+"/index.html");
+	//$('#navbarIconLink').attr("href",basepath+"/index.html");
+	//$('#sysadminNavLink').attr("href",basepath+"/sysadmin/index.html");
+	//$('#dbtestNavLink').attr("href",basepath+"/sysadmin/dbtest.html");
+
+	const pageLogin = function(){
+		$('#content').load(htmlDir+'login.html')
+	}
+	const pageSysAdmin = function(){
+		//$('#content').load(htmlDir+'sysadmin.html')
+	}
+	const pageDBTest = function(){
+		$('#content').load(htmlDir+'dbtest.html')
+	}
+	const pageDBTest2 = function(){
+		$('#content').load(htmlDir+'dbtest2.html')
+	}
+	const pageAMChartsTest = function(){
+		$('#content').load(htmlDir+'demo.html')
+	}
+
+
+</script>

@@ -1,0 +1,285 @@
+	/* defining custom icons for alpha & beta
+	.fa-alpha:before {
+    font-weight: 700;
+    content: '\03b1';
+}
+	.fa-beta:before {
+    font-weight: 700;
+    content: '\03b2';
+}*/
+
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+/* chart type css styling and bounding boxes */
+  .sysadminChart {
+    width: 50%;
+    height: 400px;
+  }
+  .timeChart {
+    width: 100%;
+    height: 400px;
+  }
+  .dashboardChart {
+    width: 100%;
+    height: 400px;
+  }
+
+/* defining custom colors for use on the site */
+	.text-nc-primary {
+		color: firebrick;
+	}
+	.border-nc-primary {
+		border-color: firebrick !important;
+	}
+
+	.bg-nc-primary {
+		background-color: firebrick !important;
+	}
+	.btn.btn-nc-primary {
+		background-color: firebrick;
+		border-color: firebrick;
+		box-shadow: none !important;
+		color: white !important;
+	}
+	.btn.btn-nc-primary:hover:not([disabled]) {
+		filter: brightness(85%);
+	}
+	.btn.btn-nc-primary:active:not([disabled]) {
+		filter: brightness(75%);
+	}
+
+
+	.text-nc-secondary {
+		color: darkred;
+	}
+	.border-nc-secondary {
+		border-color: darkred !important;
+	}
+	.bg-nc-secondary {
+		background-color: darkred !important;
+	}
+	.btn.btn-nc-secondary {
+		background-color: darkred;
+		border-color: darkred;
+		box-shadow: none !important;
+		color: white !important;
+	}
+	.btn.btn-nc-secondary:hover:not([disabled]) {
+		filter: brightness(85%);
+	}
+	.btn.btn-nc-secondary:active:not([disabled]) {
+		filter: brightness(75%);
+	}
+
+
+	.text-nc-link {
+		color: red;
+	}
+	.border-nc-link {
+		border-color: red !important;
+	}
+	.bg-nc-link {
+		background-color: red !important;
+	}
+	.btn.btn-nc-link {
+		background-color: red;
+		border-color: red;
+		box-shadow: none !important;
+		color: white !important;
+	}
+	.btn.btn-nc-link:hover:not([disabled]) {
+		filter: brightness(85%);
+	}
+	.btn.btn-nc-link:active:not([disabled]) {
+		filter: brightness(75%);
+	}
+
+	.text-nc-dark {
+		color: dimgray; /* Hex = 696969 */      /* nice */
+	}
+	.border-nc-dark {
+		border-color: dimgray !important; /* Hex = 696969 */      /* nice */
+	}
+	.bg-nc-dark {
+		background-color: dimgray !important; /* Hex = 696969 */      /* nice */
+	}
+	.btn.btn-nc-dark {
+		background-color: dimgray; /* Hex = 696969 */      /* nice */
+		border-color: dimgray;
+		box-shadow: none !important;
+		color: white !important;
+	}
+	.btn.btn-nc-dark:hover:not([disabled]) {
+		filter: brightness(85%);
+	}
+	.btn.btn-nc-dark:active:not([disabled]) {
+		filter: brightness(75%);
+	}
+
+	.text-nc-light {
+		color: indianred;
+	}
+	.border-nc-light {
+		border-color: indianred !important;
+	}
+	.bg-nc-light {
+		background-color: indianred !important;
+	}
+	.btn.btn-nc-light {
+		background-color: indianred;
+		border-color: indianred;
+		box-shadow: none !important;
+	}
+	.btn.btn-nc-light:hover:not([disabled]) {
+		filter: brightness(85%);
+	}
+	.btn.btn-nc-light:active:not([disabled]) {
+		filter: brightness(75%);
+	}
+
+	.text-nc-light-2 {
+		color: lightcoral;
+	}
+	.border-nc-light-2 {
+		border-color: lightcoral !important;
+	}
+	.bg-nc-light-2 {
+		background-color: lightcoral !important;
+	}
+	.btn.btn-nc-light-2 {
+		background-color: lightcoral;
+		border-color: lightcoral;
+		box-shadow: none !important;
+	}
+	.btn.btn-nc-light-2:hover:not([disabled]) {
+		filter: brightness(85%);
+	}
+	.btn.btn-nc-light-2:active:not([disabled]) {
+		filter: brightness(75%);
+	}
+
+	.text-nc-info {
+		color: slateblue;
+	}
+	.border-nc-info {
+		border-color: slateblue !important;
+	}
+	.bg-nc-info {
+		background-color: slateblue !important;
+	}
+	.btn.btn-nc-info {
+		background-color: slateblue;
+		border-color: slateblue;
+		box-shadow: none !important;
+		color: white !important;
+	}
+	.btn.btn-nc-info:hover:not([disabled]) {
+		filter: brightness(85%);
+	}
+	.btn.btn-nc-info:active:not([disabled]) {
+		filter: brightness(75%);
+	}
+
+	.text-nc-danger {
+		color: cyan;
+	}
+	.border-nc-danger {
+		border-color: cyan !important;
+	}
+	.bg-nc-danger {
+		background-color: cyan !important;
+	}
+	.btn.btn-nc-danger {
+		background-color: cyan;
+		border-color: cyan;
+		box-shadow: none !important;
+		color: white !important;
+	}
+	.btn.btn-nc-danger:hover:not([disabled]) {
+		filter: brightness(85%);
+	}
+	.btn.btn-nc-danger:active:not([disabled]) {
+		filter: brightness(75%);
+	}
+
+	.navbar-light {
+		background-color: whitesmoke !important;
+	}
+
+	/*
+	ul.nav li a, ul.nav li a:visited {
+    color: darkturquoise !important;
+	}
+
+	ul.nav li a:hover, ul.nav li a:active {
+	    color: mediumturquoise !important;
+	}
+
+	ul.nav li.active a {
+	    color: dimgray !important;
+	}*/
+	a {
+		color: red;
+	}
+	a:hover {
+		color: indianred;
+	}
+	a:visited {
+		color: red;
+	}
+	a:active {
+		color: firebrick;
+	}
+	a.nav-link.active {
+		color: firebrick !important;
+	}
+	a.nav-item.nav-link.active {
+		color: firebrick !important;
+		font-weight: 500 !important;
+	}
+	li.page-item .page-link {
+		color: red !important;
+	}
+	li.page-item.active .page-link {
+		background-color: firebrick !important;
+		border-color: firebrick !important;
+		color: white !important;
+	}
+	a.collapse-text:hover:not([disabled]) {
+		filter: brightness(85%);
+	}
+	a.link-unstyled {
+	  &,
+	  &:visited,
+	  &:hover,
+	  &:active,
+	  &:focus,
+	  &:active:hover {
+	    font-style: inherit;
+	    color: inherit !important;
+	    background-color: transparent;
+	    font-size: inherit;
+	    text-decoration: none !important;
+	    font-variant: inherit;
+	    font-weight: inherit;
+	    line-height: inherit;
+	    font-family: inherit;
+	    border-radius: inherit;
+	    border: inherit;
+	    outline: inherit;
+	    box-shadow: inherit;
+	    padding: inherit;
+	    vertical-align: inherit;
+	  }
+	}
+
+	table th {
+		background-color: firebrick !important;
+	}
+	table tr.even {
+		background-color: lightcoral !important;
+	}
+	table tr.odd {
+		background-color: snow !important;
+	}
+

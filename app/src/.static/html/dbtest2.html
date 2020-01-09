@@ -1,0 +1,29 @@
+<p> Result </p>
+<div class="result" id="resultDiv"></div>
+
+<script>
+
+	var addConn = (async function() {
+		try {
+			const mssql = require('mssql');
+			const config = {server:'LMIL-US001337-1/MSSQLSERVER01',database:'AccessControl'};
+
+			let pool = await mssql.connect(config);
+			let res = await pool.request();
+			return await pool.request().query()
+
+			console.log("success");
+			$('#resultDiv').html('WeDidIt');
+			
+		} catch (err) {
+			console.log(err);
+			$('#resultDiv').html("Error: "+err);
+		}
+	});
+
+	//$('#resultDiv').load(phpDir+'testquery.php');
+
+	addConn();
+
+</script>
+

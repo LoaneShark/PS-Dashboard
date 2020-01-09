@@ -30,6 +30,7 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../src/.static/css/main.css';
 import '../src/.static/css/chart.css';
+import { ResponsiveCalendar } from '@nivo/calendar'
 
 // requires
 const fs = require('fs');

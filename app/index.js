@@ -9,6 +9,7 @@ import Root from './containers/Root';
 import { configureStore, history } from './store/configureStore';
 import Login from './components/Login';
 import Navigation from './components/Navigation';
+import Footer from './components/Footer';
 import './main.global.css';
 
 const store = configureStore();
@@ -25,14 +26,20 @@ render(
 render(
   <div id="pageBody" className="body">
     <section id="navigation" />
-    <section id="content" />
+
+    <section id="content" className="container" />
+
+    <hr className="my-4" />
+    <section id="footer" />
   </div>,
   document.getElementById('root')
 );
 
 const navBox = new Navigation();
-
 render(navBox.render(), document.getElementById('navigation'));
+
+const pageFooter = new Footer();
+render(pageFooter.render(), document.getElementById('footer'));
 
 $().ready(function pageReady() {
   // enables the "display password" checkbox functionality

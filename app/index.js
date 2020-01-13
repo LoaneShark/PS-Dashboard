@@ -41,18 +41,6 @@ render(navBox.render(), document.getElementById('navigation'));
 const pageFooter = new Footer();
 render(pageFooter.render(), document.getElementById('footer'));
 
-$().ready(function pageReady() {
-  // enables the "display password" checkbox functionality
-  $('.check-password').on('change', function checkPass() {
-    const isChecked = $(this).prop('checked');
-    if (isChecked) {
-      $('.form-password').attr('type', 'text');
-    } else {
-      $('.form-password').attr('type', 'password');
-    }
-  });
-});
-
 // fixes data table sizing on window reload
 $(window).on('load', function pageLoad() {
   $('a[data-toggle="tab"]').on('shown.bs.tab', function tabFix(e) {

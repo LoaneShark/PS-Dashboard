@@ -2,7 +2,7 @@
 // import $ from 'jquery';
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-// import $ from 'jquery';
+import $ from 'jquery';
 import northlandNavImage from '../.static/img/northland-black-t.png';
 import Login from './Login';
 import NivoTest from './NivoDemo';
@@ -20,6 +20,17 @@ const pageLogin = function pageLogin() {
   // $('#content').load(`${htmlDir}login.html`);
   const loginBox = new Login();
   render(loginBox.render(), document.getElementById('content'));
+  $().ready(function pageReady() {
+    // enables the "display password" checkbox functionality
+    $('.check-password').on('change', function checkPass() {
+      const isChecked = $(this).prop('checked');
+      if (isChecked) {
+        $('.form-password').attr('type', 'text');
+      } else {
+        $('.form-password').attr('type', 'password');
+      }
+    });
+  });
 };
 const pageSysAdmin = function pageSysAdmin() {
   // $('#content').load(`${htmlDir}sysadmin.html`);

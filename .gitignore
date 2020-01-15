@@ -46,6 +46,7 @@ dist
 dll
 main.js
 main.js.map
+.webpack
 
 .idea
 npm-debug.log.*

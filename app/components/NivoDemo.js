@@ -103,8 +103,6 @@ export default class NivoTest extends Component<Props> {
     */
     return (
       <div id="charts">
-        <div id="chartdiv" style={{ width: '900px', height: '800px' }} />
-        <div id="chartdiv2" style={{ width: '900px', height: '800px' }} />
         <div className="dashboardChart">
           <ResponsiveCalendar
             data={caldata}
@@ -132,6 +130,8 @@ export default class NivoTest extends Component<Props> {
             ]}
           />
         </div>
+        <div id="chartdiv" style={{ width: '900px', height: '800px' }} />
+        <div id="chartdiv2" style={{ width: '900px', height: '800px' }} />
       </div>
     );
   }

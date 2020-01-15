@@ -3,6 +3,7 @@ import { Component } from 'react';
 import $ from 'jquery';
 
 const mssql = require('mssql');
+// const mssql = require('msnodesqlv8');
 
 /*
 type Props = {
@@ -23,9 +24,18 @@ export default class DBQuery extends Component<Props> {
 
   async addConn() {
     try {
+      console.log('attempting connection...');
+
       this.config = {
-        server: 'LMIL-US001337-1/MSSQLSERVER01',
-        database: 'AccessControl'
+        server: 'LMIL-US001337-1',
+        database: 'AccessControl',
+        user: 'dashboardTest',
+        password: 'dashboardTest',
+        // driver: 'msnodesqlv8',
+        options: {
+          trustedConnection: true,
+          instanceName: 'MSSQLSERVER01'
+        }
       };
 
       const pool = await mssql.connect(this.config);
@@ -36,7 +46,7 @@ export default class DBQuery extends Component<Props> {
       return res.query();
     } catch (err) {
       console.log(err);
-      $('#resultDiv').html(`Error: {err}`);
+      $('#resultDiv').html(`Error: ${err}`);
     }
   }
 }

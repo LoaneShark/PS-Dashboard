@@ -1251,6 +1251,11 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@js-joda/core@^1.12.0":
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/@js-joda/core/-/core-1.12.0.tgz#f310b0f89382adb54cf6d636dc38f295736d7835"
+  integrity sha512-XfqsWzY2jRUcVesKJ/vbZPDzfBZo2jHBWofabPozJQFguSQ0XEaUbdFPBeUICUmfeRsQn/Z+/SPTHSboT0XO3A==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -14962,6 +14967,22 @@ tedious@^6.6.2:
     "@azure/ms-rest-nodeauth" "2.0.2"
     "@types/node" "^12.12.17"
     "@types/readable-stream" "^2.3.5"
+    bl "^3.0.0"
+    depd "^2.0.0"
+    iconv-lite "^0.5.0"
+    jsbi "^3.1.1"
+    native-duplexpair "^1.0.0"
+    punycode "^2.1.0"
+    readable-stream "^3.4.0"
+    sprintf-js "^1.1.2"
+
+tedious@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/tedious/-/tedious-8.0.1.tgz#b20174e6564ed8ff045001375cccfb6e0f846804"
+  integrity sha512-Wjgk4yHRHjyw0mnY/fu+offE/Yef2N2YKxsq2zv4Hsx7rEem4PnskFFgsYmjD86m5T0O7hKecrWY0fX9CptESw==
+  dependencies:
+    "@azure/ms-rest-nodeauth" "2.0.2"
+    "@js-joda/core" "^1.12.0"
     bl "^3.0.0"
     depd "^2.0.0"
     iconv-lite "^0.5.0"

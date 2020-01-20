@@ -1,8 +1,7 @@
 // @flow
 import { Component } from 'react';
 import $ from 'jquery';
-
-const mssql = require('mssql');
+import * as mssql from 'mssql';
 // const mssql = require('msnodesqlv8');
 
 /*
@@ -27,18 +26,21 @@ export default class DBQuery extends Component<Props> {
       console.log('attempting connection...');
 
       this.config = {
-        server: 'LMIL-US001337-1',
+        server: 'localhost\\MSSQLSERVER01',
         database: 'AccessControl',
-        user: 'dashboardTest',
-        password: 'dashboardTest',
-        // driver: 'msnodesqlv8',
-        options: {
-          trustedConnection: true,
-          instanceName: 'MSSQLSERVER01'
-        }
+        // user: 'dashboardTest',
+        // password: 'dashboardTest' // ,
+        driver: 'msnodesqlv8'
+        // options: {
+        //  trustedConnection: true,
+        //  instanceName: 'MSSQLSERVER01'
+        // }
       };
 
-      const pool = await mssql.connect(this.config);
+      console.log(this.config);
+
+      const poolBase = new mssql.ConnectionPool(this.config);
+      const pool = await poolBase.connect();
       const res = await pool.request();
 
       console.log('success');

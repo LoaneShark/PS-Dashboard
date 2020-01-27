@@ -257,7 +257,7 @@
     "yarn": "^1.21.1"
   },
   "dependencies": {
-    "@amcharts/amcharts4": "^4.7.21",
+    "@amcharts/amcharts4": "^4.8.0",
     "@amcharts/amcharts4-geodata": "^4.1.10",
     "@fortawesome/fontawesome-free": "^5.12.0",
     "@hot-loader/react-dom": "^16.11.0",
@@ -281,7 +281,7 @@
     "app-root-path": "^3.0.0",
     "bootstrap": "^4.4.1",
     "connected-react-router": "^6.6.1",
-    "core-js": "^3.5.0",
+    "core-js": "^3.6.4",
     "devtron": "^1.4.0",
     "electron-debug": "^3.0.1",
     "electron-log": "^4.0.0",
@@ -289,6 +289,7 @@
     "electron-updater": "^4.2.0",
     "history": "^4.10.1",
     "jquery": "^3.4.1",
+    "msnodesqlv8": "^0.8.6",
     "mssql": "^6.0.1",
     "popper.js": "^1.16.0",
     "react": "^16.12.0",

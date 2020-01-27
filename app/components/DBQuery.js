@@ -1,8 +1,10 @@
 // @flow
 import { Component } from 'react';
 import $ from 'jquery';
-import * as mssql from 'mssql';
-// const mssql = require('msnodesqlv8');
+// import * as mssql from 'mssql/msnodesqlv8';
+import { SqlClient } from 'msnodesqlv8';
+
+const mssql: SqlClient = require('msnodesqlv8');
 
 /*
 type Props = {
@@ -15,8 +17,6 @@ type Props = {
 */
 
 export default class DBQuery extends Component<Props> {
-  props: Props;
-
   dbConn() {
     this.addConn();
   }
@@ -30,11 +30,11 @@ export default class DBQuery extends Component<Props> {
         database: 'AccessControl',
         // user: 'dashboardTest',
         // password: 'dashboardTest' // ,
-        driver: 'msnodesqlv8'
-        // options: {
-        //  trustedConnection: true,
-        //  instanceName: 'MSSQLSERVER01'
-        // }
+        driver: 'msnodesqlv8',
+        options: {
+          trustedConnection: true
+          //  instanceName: 'MSSQLSERVER01'
+        }
       };
 
       console.log(this.config);

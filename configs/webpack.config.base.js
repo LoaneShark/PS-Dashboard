@@ -26,6 +26,10 @@ export default {
         resolve: {
           aliasFields: ['main']
         }
+      },
+      {
+        test: /\.node$/,
+        use: 'node-loader'
       }
     ]
   },

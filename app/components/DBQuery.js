@@ -3,7 +3,7 @@ import { Component } from 'react';
 import $ from 'jquery';
 import { ConnectionPool } from 'mssql';
 
-const client = require('mssql/msnodesqlv8');
+const client = require('mssql');
 
 /*
 type Props = {
@@ -28,9 +28,10 @@ export default class DBQuery extends Component<Props> {
       this.config = {
         server: 'localhost\\MSSQLSERVER01',
         database: 'AccessControl',
-        driver: 'msnodesqlv8',
+        // driver: 'msnodesqlv8',
         options: {
-          trustedConnection: true
+          trustedConnection: true,
+          encryption: true
         }
       };
 

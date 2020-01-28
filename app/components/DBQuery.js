@@ -1,10 +1,9 @@
 // @flow
 import { Component } from 'react';
 import $ from 'jquery';
-// import * as mssql from 'mssql/msnodesqlv8';
-import { SqlClient } from 'msnodesqlv8';
+import { ConnectionPool } from 'mssql';
 
-const mssql: SqlClient = require('msnodesqlv8');
+const client = require('mssql/msnodesqlv8');
 
 /*
 type Props = {
@@ -25,27 +24,41 @@ export default class DBQuery extends Component<Props> {
     try {
       console.log('attempting connection...');
 
+      // Local server config
       this.config = {
         server: 'localhost\\MSSQLSERVER01',
         database: 'AccessControl',
-        // user: 'dashboardTest',
-        // password: 'dashboardTest' // ,
         driver: 'msnodesqlv8',
         options: {
           trustedConnection: true
-          //  instanceName: 'MSSQLSERVER01'
         }
       };
 
       console.log(this.config);
 
-      const poolBase = new mssql.ConnectionPool(this.config);
-      const pool = await poolBase.connect();
-      const res = await pool.request();
+      // Establish ConnectionPool to the SQL Server
+      // eslint-disable-next-line no-unused-vars
+      const connection: ConnectionPool = new client.ConnectionPool(this.config)
+        .connect()
+        .then(pool => {
+          return pool.query('select * from dbo.EMP').then(res => {
+            console.log(res);
+            return res;
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          $('#resultDiv').html(`Error: ${err}`);
+        });
+
+      /*
+      var connection: Connection = new client.Connection(this.config);
+      connection.connect();
+      var request = new Request(connection);
+      */
 
       console.log('success');
       $('#resultDiv').html('WeDidIt');
-      return res.query();
     } catch (err) {
       console.log(err);
       $('#resultDiv').html(`Error: ${err}`);

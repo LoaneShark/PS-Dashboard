@@ -10917,10 +10917,6 @@ ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-msnodesqlv8@TimelordUK/node-sqlserver-v8#131/head:
-  version "0.8.6"
-  resolved "https://codeload.github.com/TimelordUK/node-sqlserver-v8/tar.gz/700fe13bfae900a163c55a2c3e4a3598dbae8d83"
-
 mssql@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/mssql/-/mssql-6.0.1.tgz#3aab69b7c19dd1b304495f27b748535d0110b477"

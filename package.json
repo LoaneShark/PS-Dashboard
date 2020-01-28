@@ -289,7 +289,6 @@
     "electron-updater": "^4.2.0",
     "history": "^4.10.1",
     "jquery": "^3.4.1",
-    "msnodesqlv8": "TimelordUK/node-sqlserver-v8#131/head",
     "mssql": "^6.0.1",
     "node-loader": "^0.6.0",
     "popper.js": "^1.16.0",

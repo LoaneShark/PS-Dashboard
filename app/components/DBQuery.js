@@ -26,7 +26,7 @@ export default class DBQuery extends Component<Props> {
 
       // Local server config
       this.config = {
-        server: 'localhost\\MSSQLSERVER01',
+        server: 'localhost',
         database: 'AccessControl',
         driver: 'msnodesqlv8',
         options: {
@@ -66,6 +66,43 @@ export default class DBQuery extends Component<Props> {
       $('#resultDiv').html(`Error: ${err}`);
     }
   }
+
+  async addConnVar() {
+    console.log('attempting connection...');
+
+    // Local server config
+    this.config = {
+      server: 'localhost',
+      database: 'AccessControl',
+      driver: 'msnodesqlv8',
+      options: {
+        trustedConnection: true
+      }
+    };
+
+    console.log(this.config);
+
+    // Establish ConnectionPool to the SQL Server
+    // eslint-disable-next-line no-unused-vars
+    const connection: ConnectionPool = new client.ConnectionPool(
+      this.config
+    ).connect();
+    const myPool = await connection;
+    console.log('myPool');
+    console.log(myPool);
+    const myPoolResponse = await myPool.query(testQuery1());
+    console.log('myPoolResponse');
+
+    /*
+    var connection: Connection = new client.Connection(this.config);
+    connection.connect();
+    var request = new Request(connection);
+    */
+
+    console.log('success');
+    $('#resultDiv').html('WeDidIt');
+    return myPoolResponse.recordset;
+  }
 }
 
 const testQuery1 = function testQuery1() {
@@ -81,7 +118,7 @@ const testQuery1 = function testQuery1() {
                            dbo.ALARMINPUT ON dbo.EVENTS.MACHINE = dbo.ALARMINPUT.PANELID AND dbo.EVENTS.DEVID = dbo.ALARMINPUT.ALARMPID AND dbo.EVENTS.INPUTDEVID = dbo.ALARMINPUT.INPUTID LEFT OUTER JOIN
                            dbo.ACCESSPANE ON dbo.EVENTS.MACHINE = dbo.ACCESSPANE.PANELID LEFT OUTER JOIN
                            dbo.ALARMPANEL ON dbo.EVENTS.MACHINE = dbo.ALARMPANEL.PANELID AND dbo.EVENTS.DEVID = dbo.ALARMPANEL.ALARMPID
-  WHERE        (dbo.ALARMPANEL.NAME IS NOT NULL) AND (dbo.EVENTS.EVENTTYPE = 4) AND (dbo.EVENTS.EVENTID = 2)and events.event_time_utc > getdate()-360
+  WHERE        (dbo.ALARMPANEL.NAME IS NOT NULL) AND (dbo.EVENTS.EVENTTYPE = 4) AND (dbo.EVENTS.EVENTID = 2)and events.event_time_utc > getdate()-120
   GROUP BY dbo.ALARMINPUT.NAME, dbo.ALARMPANEL.NAME, dbo.ACCESSPANE.NAME, dbo.ALARM.ALPRIORITY, dbo.EVENT.EVDESCR,  dbo.EVENTS.EVENT_TIME_UTC
 
   Union all
@@ -95,7 +132,7 @@ const testQuery1 = function testQuery1() {
                            dbo.READER ON dbo.EVENTS.MACHINE = dbo.READER.PANELID AND dbo.EVENTS.DEVID = dbo.READER.READERID LEFT OUTER JOIN
                            dbo.ACCESSPANE ON dbo.EVENTS.MACHINE = dbo.ACCESSPANE.PANELID LEFT OUTER JOIN
                            dbo.EVENT ON dbo.EVENTS.EVENTID = dbo.EVENT.EVID AND dbo.EVENTS.EVENTTYPE = dbo.EVENT.EVTYPEID
-  WHERE        (dbo.READER.AUX1NAME IS NOT NULL) AND (dbo.EVENTS.EVENTTYPE = 4) AND (dbo.EVENTS.EVENTID = 2) AND (dbo.EVENTS.INPUTDEVID = 1)and events.event_time_utc > getdate()-360
+  WHERE        (dbo.READER.AUX1NAME IS NOT NULL) AND (dbo.EVENTS.EVENTTYPE = 4) AND (dbo.EVENTS.EVENTID = 2) AND (dbo.EVENTS.INPUTDEVID = 1)and events.event_time_utc > getdate()-120
   GROUP BY dbo.EVENT.EVDESCR, dbo.READER.AUX1NAME, dbo.READER.READERDESC, dbo.ACCESSPANE.NAME, dbo.ALARM.ALPRIORITY, DATEPART(MM, dbo.EVENTS.EVENT_TIME_UTC), DATEPART(DD,
                            dbo.EVENTS.EVENT_TIME_UTC)
 
@@ -109,7 +146,7 @@ const testQuery1 = function testQuery1() {
                            dbo.READER ON dbo.EVENTS.MACHINE = dbo.READER.PANELID AND dbo.EVENTS.DEVID = dbo.READER.READERID LEFT OUTER JOIN
                            dbo.ACCESSPANE ON dbo.EVENTS.MACHINE = dbo.ACCESSPANE.PANELID LEFT OUTER JOIN
                            dbo.EVENT ON dbo.EVENTS.EVENTID = dbo.EVENT.EVID AND dbo.EVENTS.EVENTTYPE = dbo.EVENT.EVTYPEID
-  WHERE        (dbo.READER.AUX2NAME IS NOT NULL) AND (dbo.EVENTS.EVENTTYPE = 4) AND (dbo.EVENTS.EVENTID = 2) AND (dbo.EVENTS.INPUTDEVID = 2)and events.event_time_utc > getdate()-360
+  WHERE        (dbo.READER.AUX2NAME IS NOT NULL) AND (dbo.EVENTS.EVENTTYPE = 4) AND (dbo.EVENTS.EVENTID = 2) AND (dbo.EVENTS.INPUTDEVID = 2)and events.event_time_utc > getdate()-120
   GROUP BY dbo.EVENT.EVDESCR, dbo.READER.AUX2NAME, dbo.READER.READERDESC, dbo.ACCESSPANE.NAME, dbo.ALARM.ALPRIORITY, DATEPART(MM, dbo.EVENTS.EVENT_TIME_UTC), DATEPART(DD,
                            dbo.EVENTS.EVENT_TIME_UTC)`;
 };

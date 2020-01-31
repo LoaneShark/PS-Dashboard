@@ -9,8 +9,8 @@ import { ResponsiveCalendar } from '@nivo/calendar';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import * as am4maps from '@amcharts/amcharts4/maps';
-
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow';
+import DBQuery from './DBQuery';
 
 /*
 type Props = {
@@ -25,7 +25,11 @@ type Props = {
 export default class NivoTest extends Component<Props> {
   props: Props;
 
-  chartrender = () => {
+  chartrender = async () => {
+    this.testQuery = new DBQuery();
+    this.dataTest = await this.testQuery.addConnVar();
+    console.log(this.dataTest);
+
     const chart = am4core.create('chartdiv', am4charts.PieChart);
     const map = am4core.create('chartdiv2', am4maps.MapChart);
     map.geodata = am4geodata_worldLow;
@@ -85,13 +89,40 @@ export default class NivoTest extends Component<Props> {
 
     const polygonTemplate = polygonSeries.mapPolygons.template;
     polygonTemplate.tooltipText = '{name}: {value}';
-    polygonTemplate.fil = am4core.color('#74B266');
+    polygonTemplate.fill = am4core.color('#74B266');
 
     const hs = polygonTemplate.states.create('hover');
     hs.properties.fill = am4core.color('#367B25');
   };
 
-  render() {
+  MyResponsiveCalendar = ({ caldata /* see data tab */ }) => (
+    <ResponsiveCalendar
+      data={caldata}
+      from="2015-03-01"
+      to="2016-07-12"
+      emptyColor="#eeeeee"
+      colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
+      margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
+      yearSpacing={40}
+      monthBorderColor="#ffffff"
+      dayBorderWidth={2}
+      dayBorderColor="#ffffff"
+      legends={[
+        {
+          anchor: 'bottom-right',
+          direction: 'row',
+          translateY: 36,
+          itemCount: 4,
+          itemWidth: 42,
+          itemHeight: 36,
+          itemsSpacing: 14,
+          itemDirection: 'right-to-left'
+        }
+      ]}
+    />
+  );
+
+  render = () => {
     /*
     const {
       increment,
@@ -134,7 +165,7 @@ export default class NivoTest extends Component<Props> {
         <div id="chartdiv2" style={{ width: '900px', height: '800px' }} />
       </div>
     );
-  }
+  };
 }
 
 const caldata = [

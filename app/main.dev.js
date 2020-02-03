@@ -111,3 +111,10 @@ app.on('activate', () => {
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
 });
+
+/*
+  // Keyboard shortcut to open DevTools
+  const ret = globalShortcut.register('CommandOrControl+Shift+I', () => {
+    mainWindow.webContents.toggleDevTools();
+  });
+*/

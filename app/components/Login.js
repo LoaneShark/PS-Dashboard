@@ -36,7 +36,7 @@ export default class Login extends Component<Props> {
                 PS
               </span>
               <span className="text-nc-primary" id="title2">
-                Dashboard
+                &nbsp;Dashboard
               </span>
             </p>
             <img src={northlandImage} alt="Northland Bear" height="120vw" />

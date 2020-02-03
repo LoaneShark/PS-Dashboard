@@ -25,14 +25,15 @@ export default class DBQuery extends Component<Props> {
       console.log('attempting connection...');
 
       // Local server config
-      this.config = {
-        server: 'localhost',
-        database: 'AccessControl',
-        driver: 'msnodesqlv8',
-        options: {
-          trustedConnection: true
+      $.ajax({
+        async: false,
+        global: false,
+        url: './config/dbconfig.json',
+        dataType: 'json',
+        success: data => {
+          this.config = data;
         }
-      };
+      });
 
       console.log(this.config);
 
@@ -71,14 +72,15 @@ export default class DBQuery extends Component<Props> {
     console.log('attempting connection...');
 
     // Local server config
-    this.config = {
-      server: 'localhost',
-      database: 'AccessControl',
-      driver: 'msnodesqlv8',
-      options: {
-        trustedConnection: true
+    $.ajax({
+      async: false,
+      global: false,
+      url: './config/dbconfig.json',
+      dataType: 'json',
+      success: data => {
+        this.config = data;
       }
-    };
+    });
 
     console.log(this.config);
 

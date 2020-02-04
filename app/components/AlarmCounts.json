@@ -1,0 +1,26 @@
+[
+  {
+    "  country": "SCV",
+    "  litres": 315
+  },
+  {
+    "  country": "AMER",
+    "  litres": 137
+  },
+  {
+    "  country": "EMEA",
+    "  litres": 72
+  },
+  {
+    "  country": "APAC",
+    "  litres": 104
+  },
+  {
+    "  country": "Apple Park",
+    "  litres": 66
+  },
+  {
+    "  country": "Data Centers",
+    "  litres": 61
+  }
+]

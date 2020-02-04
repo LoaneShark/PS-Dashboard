@@ -27,9 +27,120 @@ export default class NivoTest extends Component<Props> {
 
   chartrender = async () => {
     this.testQuery = new DBQuery();
-    this.dataTest = await this.testQuery.addConnVar();
-    console.log(this.dataTest);
+    this.dataTest = await this.testQuery.addConnAlarmCountHour();
+    // console.log(this.dataTest.rows);
+    const today = new Date();
+    console.log(today);
 
+    const dateData = [];
+    const priorityListing = [];
+    for (let i = 0; i < this.dataTest.rows.length; i += 1) {
+      let myYear;
+      if (this.dataTest.rows[i][7] <= today.getMonth() + 1) {
+        myYear = today.getFullYear();
+      } else {
+        myYear = today.getFullYear() - 1;
+      }
+      const myDate = new Date(
+        myYear,
+        this.dataTest.rows[i][7],
+        this.dataTest.rows[i][6]
+      );
+      dateData.push({ Date: myDate, Priority: this.dataTest.rows[i][5] });
+      priorityListing.push(this.dataTest.rows[i][5]);
+    }
+
+    dateData.sort(function(a, b) {
+      return new Date(a.Date) - new Date(b.Date);
+    });
+
+    console.log(dateData);
+
+    const alarmCountPriority = [];
+    const alarmCountData = [];
+
+    for (let i = 0; i < dateData.length; i += 1) {
+      const tempPri = dateData[i].Priority;
+
+      if (tempPri === 101) {
+        const tempResult = alarmCountData.findIndex(
+          obj =>
+            obj.Date.setHours(0, 0, 0, 0) ===
+            dateData[i].Date.setHours(0, 0, 0, 0)
+        );
+
+        if (tempResult === -1) {
+          alarmCountData.push({
+            Date: dateData[i].Date,
+            Alarms: 1,
+            Alarms2: 0,
+            Alarms3: 0,
+            Alarms4: 0
+          });
+        } else {
+          alarmCountData[tempResult].Alarms += 1;
+        }
+      } else if (tempPri === 102) {
+        const tempResult = alarmCountData.findIndex(
+          obj =>
+            obj.Date.setHours(0, 0, 0, 0) ===
+            dateData[i].Date.setHours(0, 0, 0, 0)
+        );
+
+        if (tempResult === -1) {
+          alarmCountData.push({
+            Date: dateData[i].Date,
+            Alarms: 0,
+            Alarms2: 1,
+            Alarms3: 0,
+            Alarms4: 0
+          });
+        } else {
+          alarmCountData[tempResult].Alarms2 += 1;
+        }
+      } else if (tempPri === 100) {
+        const tempResult = alarmCountData.findIndex(
+          obj =>
+            obj.Date.setHours(0, 0, 0, 0) ===
+            dateData[i].Date.setHours(0, 0, 0, 0)
+        );
+
+        if (tempResult === -1) {
+          alarmCountData.push({
+            Date: dateData[i].Date,
+            Alarms: 0,
+            Alarms2: 0,
+            Alarms3: 1,
+            Alarms4: 0
+          });
+        } else {
+          alarmCountData[tempResult].Alarms3 += 1;
+        }
+      } else {
+        const tempResult = alarmCountData.findIndex(
+          obj =>
+            obj.Date.setHours(0, 0, 0, 0) ===
+            dateData[i].Date.setHours(0, 0, 0, 0)
+        );
+
+        if (tempResult === -1) {
+          alarmCountData.push({
+            Date: dateData[i].Date,
+            Alarms: 0,
+            Alarms2: 0,
+            Alarms3: 0,
+            Alarms4: 1
+          });
+        } else {
+          alarmCountData[tempResult].Alarms4 += 1;
+        }
+      }
+    }
+
+    console.log(alarmCountData);
+    console.log(alarmCountPriority);
+
+    const alarmCountChart = am4core.create('chartdiv3', am4charts.XYChart);
     const chart = am4core.create('chartdiv', am4charts.PieChart);
     const map = am4core.create('chartdiv2', am4maps.MapChart);
     map.geodata = am4geodata_worldLow;
@@ -37,6 +148,54 @@ export default class NivoTest extends Component<Props> {
     const series = chart.series.push(new am4charts.PieSeries());
     series.dataFields.value = '  litres';
     series.dataFields.category = '  country';
+
+    alarmCountChart.data = alarmCountData;
+    // alarmCountChart.dataSource.url = "components/AlarmCounts.csv"
+    // alarmCountChart.dataSource.parser = new am4core.CSVParser();
+    // alarmCountChart.dataSource.parser.options.useColumnNames = true;
+
+    const alarmDateAxis = alarmCountChart.xAxes.push(new am4charts.DateAxis());
+    // alarmDateAxis.dataFields.category = "year";
+
+    const alarmValueAxis = alarmCountChart.yAxes.push(
+      new am4charts.ValueAxis()
+    );
+    alarmDateAxis.title.text = 'Date';
+    alarmValueAxis.title.text = 'Number of Alarms';
+    alarmCountChart.scrollbarX = new am4core.Scrollbar();
+
+    const series2 = alarmCountChart.series.push(new am4charts.LineSeries());
+    series2.name = 'Priority 101';
+    series2.stroke = am4core.color('#CDA2AB');
+    series2.strokeWidth = 3;
+    series2.dataFields.valueY = 'Alarms';
+    series2.dataFields.dateX = 'Date';
+
+    const series3 = alarmCountChart.series.push(new am4charts.LineSeries());
+    series3.name = 'Priority 102';
+    series3.stroke = am4core.color('#CDA2AB');
+    series3.strokeWidth = 3;
+    series3.dataFields.valueY = 'Alarms2';
+    series3.dataFields.dateX = 'Date';
+
+    const series4 = alarmCountChart.series.push(new am4charts.LineSeries());
+    series4.name = 'Priority 103';
+    series4.stroke = am4core.color('#CDA2AB');
+    series4.strokeWidth = 3;
+    series4.dataFields.valueY = 'Alarms3';
+    series4.dataFields.dateX = 'Date';
+
+    const series5 = alarmCountChart.series.push(new am4charts.LineSeries());
+    series5.name = 'No Priority';
+    series5.stroke = am4core.color('#CDA2AB');
+    series5.strokeWidth = 3;
+    series5.dataFields.valueY = 'Alarms4';
+    series5.dataFields.dateX = 'Date';
+
+    const sixMonths = new Date();
+    sixMonths.setMonth(sixMonths.getMonth() - 6);
+    alarmDateAxis.min = sixMonths;
+    alarmDateAxis.max = today;
 
     chart.data = [
       {
@@ -163,6 +322,7 @@ export default class NivoTest extends Component<Props> {
         </div>
         <div id="chartdiv" style={{ width: '900px', height: '800px' }} />
         <div id="chartdiv2" style={{ width: '900px', height: '800px' }} />
+        <div id="chartdiv3" style={{ width: '900px', height: '800px' }} />
       </div>
     );
   };

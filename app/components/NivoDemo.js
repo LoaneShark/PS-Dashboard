@@ -28,9 +28,11 @@ export default class NivoTest extends Component<Props> {
   chartrender = async () => {
     this.testQuery = new DBQuery();
     this.dataTest = await this.testQuery.addConnAlarmCountHour();
+    this.dataTestDay = await this.testQuery.addConnAlarmCountDay();
     // console.log(this.dataTest.rows);
 
     makeAlarmCountChart(this.dataTest);
+    makeAlarmCountDay(this.dataTestDay);
 
     /*
     const chart = am4core.create('chartdiv', am4charts.PieChart);
@@ -154,7 +156,6 @@ const makeAlarmCountChart = data => {
   const today = new Date();
   console.log(today);
   const dateData = [];
-  const priorityListing = [];
   for (let i = 0; i < data.rows.length; i += 1) {
     let myYear;
     if (data.rows[i][7] <= today.getMonth() + 1) {
@@ -164,7 +165,6 @@ const makeAlarmCountChart = data => {
     }
     const myDate = new Date(myYear, data.rows[i][7], data.rows[i][6]);
     dateData.push({ Date: myDate, Priority: data.rows[i][5] });
-    priorityListing.push(data.rows[i][5]);
   }
 
   dateData.sort((a, b) => {
@@ -273,32 +273,401 @@ const makeAlarmCountChart = data => {
   alarmCountChart.scrollbarX = new am4core.Scrollbar();
 
   const series2 = alarmCountChart.series.push(new am4charts.LineSeries());
-  series2.name = 'Priority 101';
+  series2.name = 'Priority 100';
   series2.stroke = am4core.color('#CDA2AB');
   series2.strokeWidth = 3;
-  series2.dataFields.valueY = 'Alarms';
+  series2.dataFields.valueY = 'Alarms3';
   series2.dataFields.dateX = 'Date';
 
   const series3 = alarmCountChart.series.push(new am4charts.LineSeries());
-  series3.name = 'Priority 102';
-  series3.stroke = am4core.color('#CDA2AB');
+  series3.name = 'Priority 101';
+  series3.stroke = am4core.color('#FF6B9A');
   series3.strokeWidth = 3;
-  series3.dataFields.valueY = 'Alarms2';
+  series3.dataFields.valueY = 'Alarms';
   series3.dataFields.dateX = 'Date';
 
   const series4 = alarmCountChart.series.push(new am4charts.LineSeries());
-  series4.name = 'Priority 103';
-  series4.stroke = am4core.color('#CDA2AB');
+  series4.name = 'Priority 102';
+  series4.stroke = am4core.color('#20A33C');
   series4.strokeWidth = 3;
-  series4.dataFields.valueY = 'Alarms3';
+  series4.dataFields.valueY = 'Alarms2';
   series4.dataFields.dateX = 'Date';
 
   const series5 = alarmCountChart.series.push(new am4charts.LineSeries());
   series5.name = 'No Priority';
-  series5.stroke = am4core.color('#CDA2AB');
+  series5.stroke = am4core.color('#4853B8');
   series5.strokeWidth = 3;
   series5.dataFields.valueY = 'Alarms4';
   series5.dataFields.dateX = 'Date';
+  alarmCountChart.legend = new am4charts.Legend();
+
+  const sixMonths = new Date();
+  sixMonths.setMonth(sixMonths.getMonth() - 6);
+  alarmDateAxis.min = sixMonths;
+  alarmDateAxis.max = today;
+};
+
+const makeAlarmCountDay = data => {
+  const today = new Date();
+  console.log(today);
+  const dateData = [];
+  for (let i = 0; i < data.rows.length; i += 1) {
+    let myYear;
+    if (data.rows[i][5] <= today.getMonth() + 1) {
+      myYear = today.getFullYear();
+    } else {
+      myYear = today.getFullYear() - 1;
+    }
+    const myDate = new Date(myYear, data.rows[i][5], data.rows[i][4]);
+    dateData.push({
+      Date: myDate,
+      Event: data.rows[i][2],
+      Count: data.rows[i][3]
+    });
+  }
+
+  dateData.sort((a, b) => {
+    return new Date(a.Date) - new Date(b.Date);
+  });
+
+  console.log(dateData);
+
+  const alarmCountData = [];
+
+  for (let i = 0; i < dateData.length; i += 1) {
+    const tempEvent = dateData[i].Event;
+
+    if (tempEvent === 'Alarm Active') {
+      const tempResult = alarmCountData.findIndex(
+        obj =>
+          obj.Date.setHours(0, 0, 0, 0) ===
+          dateData[i].Date.setHours(0, 0, 0, 0)
+      );
+
+      if (tempResult === -1) {
+        alarmCountData.push({
+          Date: dateData[i].Date,
+          AlAct: dateData[i].Count,
+          CommLost: 0,
+          CommRes: 0,
+          CommHLost: 0,
+          CommHLRes: 0,
+          DFO: 0,
+          DHO: 0,
+          IAL: 0,
+          IB: 0,
+          Other: 0
+        });
+      } else {
+        alarmCountData[tempResult].AlAct += dateData[i].Count;
+      }
+    } else if (tempEvent === 'Communications Lost') {
+      const tempResult = alarmCountData.findIndex(
+        obj =>
+          obj.Date.setHours(0, 0, 0, 0) ===
+          dateData[i].Date.setHours(0, 0, 0, 0)
+      );
+
+      if (tempResult === -1) {
+        alarmCountData.push({
+          Date: dateData[i].Date,
+          AlAct: 0,
+          CommLost: dateData[i].Count,
+          CommRes: 0,
+          CommHLost: 0,
+          CommHLRes: 0,
+          DFO: 0,
+          DHO: 0,
+          IAL: 0,
+          IB: 0,
+          Other: 0
+        });
+      } else {
+        alarmCountData[tempResult].CommLost += dateData[i].Count;
+      }
+    } else if (tempEvent === 'Communications Restored') {
+      const tempResult = alarmCountData.findIndex(
+        obj =>
+          obj.Date.setHours(0, 0, 0, 0) ===
+          dateData[i].Date.setHours(0, 0, 0, 0)
+      );
+
+      if (tempResult === -1) {
+        alarmCountData.push({
+          Date: dateData[i].Date,
+          AlAct: 0,
+          CommLost: 0,
+          CommRes: dateData[i].Count,
+          CommHLost: 0,
+          CommHLRes: 0,
+          DFO: 0,
+          DHO: 0,
+          IAL: 0,
+          IB: 0,
+          Other: 0
+        });
+      } else {
+        alarmCountData[tempResult].CommRes += dateData[i].Count;
+      }
+    } else if (tempEvent === 'Communications With Host Lost') {
+      const tempResult = alarmCountData.findIndex(
+        obj =>
+          obj.Date.setHours(0, 0, 0, 0) ===
+          dateData[i].Date.setHours(0, 0, 0, 0)
+      );
+
+      if (tempResult === -1) {
+        alarmCountData.push({
+          Date: dateData[i].Date,
+          AlAct: 0,
+          CommLost: 0,
+          CommRes: 0,
+          CommHLost: dateData[i].Count,
+          CommHLRes: 0,
+          DFO: 0,
+          DHO: 0,
+          IAL: 0,
+          IB: 0,
+          Other: 0
+        });
+      } else {
+        alarmCountData[tempResult].CommHLost += dateData[i].Count;
+      }
+    } else if (tempEvent === 'Communications With Host Restored') {
+      const tempResult = alarmCountData.findIndex(
+        obj =>
+          obj.Date.setHours(0, 0, 0, 0) ===
+          dateData[i].Date.setHours(0, 0, 0, 0)
+      );
+
+      if (tempResult === -1) {
+        alarmCountData.push({
+          Date: dateData[i].Date,
+          AlAct: 0,
+          CommLost: 0,
+          CommRes: 0,
+          CommHLost: 0,
+          CommHLRes: dateData[i].Count,
+          DFO: 0,
+          DHO: 0,
+          IAL: 0,
+          IB: 0,
+          Other: 0
+        });
+      } else {
+        alarmCountData[tempResult].CommHLRes += dateData[i].Count;
+      }
+    } else if (tempEvent === 'Door Forced Open') {
+      const tempResult = alarmCountData.findIndex(
+        obj =>
+          obj.Date.setHours(0, 0, 0, 0) ===
+          dateData[i].Date.setHours(0, 0, 0, 0)
+      );
+
+      if (tempResult === -1) {
+        alarmCountData.push({
+          Date: dateData[i].Date,
+          AlAct: 0,
+          CommLost: 0,
+          CommRes: 0,
+          CommHLost: 0,
+          CommHLRes: 0,
+          DFO: dateData[i].Count,
+          DHO: 0,
+          IAL: 0,
+          IB: 0,
+          Other: 0
+        });
+      } else {
+        alarmCountData[tempResult].DFO += dateData[i].Count;
+      }
+    } else if (tempEvent === 'Door Held Open') {
+      const tempResult = alarmCountData.findIndex(
+        obj =>
+          obj.Date.setHours(0, 0, 0, 0) ===
+          dateData[i].Date.setHours(0, 0, 0, 0)
+      );
+
+      if (tempResult === -1) {
+        alarmCountData.push({
+          Date: dateData[i].Date,
+          AlAct: 0,
+          CommLost: 0,
+          CommRes: 0,
+          CommHLost: 0,
+          CommHLRes: 0,
+          DFO: 0,
+          DHO: dateData[i].Count,
+          IAL: 0,
+          IB: 0,
+          Other: 0
+        });
+      } else {
+        alarmCountData[tempResult].DHO += dateData[i].Count;
+      }
+    } else if (tempEvent === 'Invalid Access Level') {
+      const tempResult = alarmCountData.findIndex(
+        obj =>
+          obj.Date.setHours(0, 0, 0, 0) ===
+          dateData[i].Date.setHours(0, 0, 0, 0)
+      );
+
+      if (tempResult === -1) {
+        alarmCountData.push({
+          Date: dateData[i].Date,
+          AlAct: 0,
+          CommLost: 0,
+          CommRes: 0,
+          CommHLost: 0,
+          CommHLRes: 0,
+          DFO: 0,
+          DHO: 0,
+          IAL: dateData[i].Count,
+          IB: 0,
+          Other: 0
+        });
+      } else {
+        alarmCountData[tempResult].IAL += dateData[i].Count;
+      }
+    } else if (tempEvent === 'Invalid Badge') {
+      const tempResult = alarmCountData.findIndex(
+        obj =>
+          obj.Date.setHours(0, 0, 0, 0) ===
+          dateData[i].Date.setHours(0, 0, 0, 0)
+      );
+
+      if (tempResult === -1) {
+        alarmCountData.push({
+          Date: dateData[i].Date,
+          AlAct: 0,
+          CommLost: 0,
+          CommRes: 0,
+          CommHLost: 0,
+          CommHLRes: 0,
+          DFO: 0,
+          DHO: 0,
+          IAL: 0,
+          IB: dateData[i].Count,
+          Other: 0
+        });
+      } else {
+        alarmCountData[tempResult].IB += dateData[i].Count;
+      }
+    } else {
+      const tempResult = alarmCountData.findIndex(
+        obj =>
+          obj.Date.setHours(0, 0, 0, 0) ===
+          dateData[i].Date.setHours(0, 0, 0, 0)
+      );
+
+      if (tempResult === -1) {
+        alarmCountData.push({
+          Date: dateData[i].Date,
+          AlAct: 0,
+          CommLost: 0,
+          CommRes: 0,
+          CommHLost: 0,
+          CommHLRes: 0,
+          DFO: 0,
+          DHO: 0,
+          IAL: 0,
+          IB: 0,
+          Other: dateData[i].Count
+        });
+      } else {
+        alarmCountData[tempResult].Other += dateData[i].Count;
+      }
+    }
+  }
+
+  console.log(alarmCountData);
+
+  const alarmCountChart = am4core.create('chartdiv2', am4charts.XYChart);
+
+  alarmCountChart.data = alarmCountData;
+  // alarmCountChart.dataSource.url = "components/AlarmCounts.csv"
+  // alarmCountChart.dataSource.parser = new am4core.CSVParser();
+  // alarmCountChart.dataSource.parser.options.useColumnNames = true;
+
+  const alarmDateAxis = alarmCountChart.xAxes.push(new am4charts.DateAxis());
+  // alarmDateAxis.dataFields.category = "year";
+
+  const alarmValueAxis = alarmCountChart.yAxes.push(new am4charts.ValueAxis());
+  alarmDateAxis.title.text = 'Date';
+  alarmValueAxis.title.text = 'Number of Alarms';
+  alarmCountChart.scrollbarX = new am4core.Scrollbar();
+
+  const series2 = alarmCountChart.series.push(new am4charts.LineSeries());
+  series2.name = 'Alarm Active';
+  series2.stroke = am4core.color('#F44336');
+  series2.strokeWidth = 3;
+  series2.dataFields.valueY = 'AlAct';
+  series2.dataFields.dateX = 'Date';
+
+  const series3 = alarmCountChart.series.push(new am4charts.LineSeries());
+  series3.name = 'Communications Lost';
+  series3.stroke = am4core.color('#E91E63');
+  series3.strokeWidth = 3;
+  series3.dataFields.valueY = 'CommLost';
+  series3.dataFields.dateX = 'Date';
+
+  const series4 = alarmCountChart.series.push(new am4charts.LineSeries());
+  series4.name = 'Communications Restored';
+  series4.stroke = am4core.color('#9C27b0');
+  series4.strokeWidth = 3;
+  series4.dataFields.valueY = 'CommRes';
+  series4.dataFields.dateX = 'Date';
+
+  const series5 = alarmCountChart.series.push(new am4charts.LineSeries());
+  series5.name = 'Communications With Host Lost';
+  series5.stroke = am4core.color('#673AB7');
+  series5.strokeWidth = 3;
+  series5.dataFields.valueY = 'CommHLost';
+  series5.dataFields.dateX = 'Date';
+
+  const series6 = alarmCountChart.series.push(new am4charts.LineSeries());
+  series6.name = 'Communications With Host Restored';
+  series6.stroke = am4core.color('#3F51B5');
+  series6.strokeWidth = 3;
+  series6.dataFields.valueY = 'CommHLRes';
+  series6.dataFields.dateX = 'Date';
+
+  const series7 = alarmCountChart.series.push(new am4charts.LineSeries());
+  series7.name = 'Door Forced Open';
+  series7.stroke = am4core.color('#2196F3');
+  series7.strokeWidth = 3;
+  series7.dataFields.valueY = 'DFO';
+  series7.dataFields.dateX = 'Date';
+
+  const series8 = alarmCountChart.series.push(new am4charts.LineSeries());
+  series8.name = 'Door Held Open';
+  series8.stroke = am4core.color('#03A9F4');
+  series8.strokeWidth = 3;
+  series8.dataFields.valueY = 'DHO';
+  series8.dataFields.dateX = 'Date';
+
+  const series9 = alarmCountChart.series.push(new am4charts.LineSeries());
+  series9.name = 'Invalid Access Level';
+  series9.stroke = am4core.color('#00BCD4');
+  series9.strokeWidth = 3;
+  series9.dataFields.valueY = 'IAL';
+  series9.dataFields.dateX = 'Date';
+
+  const series10 = alarmCountChart.series.push(new am4charts.LineSeries());
+  series10.name = 'Invalid Badge';
+  series10.stroke = am4core.color('#008856');
+  series10.strokeWidth = 3;
+  series10.dataFields.valueY = 'IB';
+  series10.dataFields.dateX = 'Date';
+
+  const series11 = alarmCountChart.series.push(new am4charts.LineSeries());
+  series11.name = 'Other Alarm';
+  series11.stroke = am4core.color('#F38400');
+  series11.strokeWidth = 3;
+  series11.dataFields.valueY = 'Other';
+  series11.dataFields.dateX = 'Date';
+
+  alarmCountChart.legend = new am4charts.Legend();
 
   const sixMonths = new Date();
   sixMonths.setMonth(sixMonths.getMonth() - 6);

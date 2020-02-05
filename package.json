@@ -286,7 +286,6 @@
     "core-js": "^3.6.4",
     "datatables.net": "^1.10.20",
     "datatables.net-bs4": "^1.10.20",
-    "datatables.net-dt": "^1.10.20",
     "devtron": "^1.4.0",
     "electron-debug": "^3.0.1",
     "electron-log": "^4.0.0",

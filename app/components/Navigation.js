@@ -1,7 +1,8 @@
 // @flow
 // import $ from 'jquery';
 import React, { Component } from 'react';
-// import { DataTable } from 'datatables.net-dt';
+// import { DataTable } from 'datatables.net';
+import 'datatables.net-bs4';
 import { render } from 'react-dom';
 import $ from 'jquery';
 import northlandNavImage from '../.static/img/northland-black-t.png';
@@ -48,7 +49,7 @@ const pageChartsTest = function pageChartsTest() {
   const nivoBox = new NivoTest();
   render(nivoBox.render(), document.getElementById('content'));
   nivoBox.chartrender();
-  $(document).ready(function() {
+  $(document).ready(() => {
     $('#table_id').DataTable();
   });
 };

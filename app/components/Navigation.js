@@ -1,12 +1,14 @@
 // @flow
 // import $ from 'jquery';
 import React, { Component } from 'react';
+// import { DataTable } from 'datatables.net-dt';
 import { render } from 'react-dom';
 import $ from 'jquery';
 import northlandNavImage from '../.static/img/northland-black-t.png';
 import Login from './Login';
 import NivoTest from './NivoDemo';
 import DBQuery from './DBQuery';
+
 //  import { Link } from 'react-router-dom';
 //  import routes from '../constants/routes.json';
 
@@ -46,6 +48,9 @@ const pageChartsTest = function pageChartsTest() {
   const nivoBox = new NivoTest();
   render(nivoBox.render(), document.getElementById('content'));
   nivoBox.chartrender();
+  $(document).ready(function() {
+    $('#table_id').DataTable();
+  });
 };
 
 /*

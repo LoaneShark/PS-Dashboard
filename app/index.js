@@ -8,7 +8,7 @@ import 'electron-log';
 // import { ResponsiveCalendar } from '@nivo/calendar';
 import Root from './containers/Root';
 import { configureStore, history } from './store/configureStore';
-import Login from './components/Login';
+// import Login from './components/Login';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import './main.global.css';

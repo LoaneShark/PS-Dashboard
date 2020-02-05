@@ -34,7 +34,7 @@ export default class Footer extends Component<Props> {
           <div className="row">
             <div className="col">
               <ul className="contact-list">
-                <li className="p-name">Report issues to: </li>
+                Report bugs:
                 <li>
                   <a
                     className="u-email"
@@ -43,14 +43,18 @@ export default class Footer extends Component<Props> {
                     sloane@northlandcontrols.com
                   </a>
                 </li>
+                <li>
+                  <a href="https://github.com/LoaneShark/PS-Dashboard/issues">
+                    GitHub Issues Tracker
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
           <div className="row">
             <div className="col">
               <p className="text-muted">
-                Created on 11/7/2019 by Santiago Loane. Last updated on
-                11/8/2019.
+                Created on 11/7/2019. Last updated on 2/4/2020.
               </p>
               <p className="text-muted">
                 For internal Northland Controls use only.

@@ -17,6 +17,16 @@
   width: 50%;
   height: 400px;
 }
+
+.container {
+  max-width: 2000px;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: center;
+  float: left;
+}
+
 .timeChart {
   width: 100%;
   height: 400px;

@@ -53,12 +53,63 @@ export default class NivoTest extends Component<Props> {
     return (
       <div id="literallyEverything">
         <div id="charts">
-          <div id="chartdiv" style={{ width: '900px', height: '800px' }} />
-          <div id="chartdiv2" style={{ width: '900px', height: '800px' }} />
-          <div id="totalTransactions" />
-          <div id="chartdiv3" style={{ width: '900px', height: '800px' }} />
-          <div id="chartdiv4" style={{ width: '900px', height: '800px' }} />
-          <div id="chartdiv5" style={{ width: '900px', height: '800px' }} />
+          <div className="container">
+            <div className="row">
+              <div className="col-5">
+                <div
+                  id="chartdiv"
+                  style={{
+                    width: '600px',
+                    height: '530px',
+                    display: 'inline-block',
+                    marginTop: '20px'
+                  }}
+                />
+              </div>
+              <div className="col-7">
+                <div
+                  id="chartdiv2"
+                  style={{
+                    width: '1000px',
+                    height: '490px',
+                    marginTop: '20px'
+                  }}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-4">
+                <div
+                  id="chartdiv3"
+                  style={{
+                    width: '720px',
+                    height: '380px',
+                    display: 'inline-block'
+                  }}
+                />
+              </div>
+              <div className="col-4">
+                <div
+                  id="chartdiv4"
+                  style={{
+                    width: '620px',
+                    height: '380px',
+                    display: 'inline-block'
+                  }}
+                />
+              </div>
+              <div className="col-4">
+                <div
+                  id="chartdiv5"
+                  style={{
+                    width: '620px',
+                    height: '380px',
+                    display: 'inline-block'
+                  }}
+                />
+              </div>
+            </div>
+          </div>
         </div>
         <table id="table-id" className="table table-striped table-bordered">
           <thead>
@@ -268,6 +319,11 @@ const makeAlarmCountChart = data => {
   series5.strokeWidth = 3;
   series5.dataFields.valueY = 'Alarms4';
   series5.dataFields.dateX = 'Date';
+
+  const alarmTitle = alarmCountChart.titles.create();
+  alarmTitle.text = 'Alarm Priorities (Past 6 Months)';
+  alarmTitle.fontSize = 20;
+  alarmTitle.marginBottom = 0;
   alarmCountChart.legend = new am4charts.Legend();
 
   const sixMonths = new Date();
@@ -636,7 +692,14 @@ const makeAlarmCountDay = data => {
   series11.dataFields.valueY = 'Other';
   series11.dataFields.dateX = 'Date';
 
+  const alarmTitle = alarmCountChart.titles.create();
+  alarmTitle.text = 'Alarm Types (Past 6 Months)';
+  alarmTitle.fontSize = 20;
+  alarmTitle.marginBottom = 0;
+
   alarmCountChart.legend = new am4charts.Legend();
+  alarmCountChart.legend.position = 'right';
+  alarmCountChart.legend.width = '50%';
 
   const sixMonths = new Date();
   sixMonths.setMonth(sixMonths.getMonth() - 6);
@@ -670,6 +733,11 @@ const makeDeviceCountChart = data => {
   badgeSeries.hiddenState.properties.startAngle = 90;
   badgeSeries.hiddenState.properties.endAngle = 90;
 
+  const badgeTitle = badgeChart.titles.create();
+  badgeTitle.text = 'Active/Total Badges';
+  badgeTitle.fontSize = 20;
+  badgeTitle.marginBottom = 0;
+
   badgeChart.legend = new am4charts.Legend();
 
   // make the "Device Counts" charts for ACS/VMS Headend
@@ -683,6 +751,10 @@ const makeDeviceCountChart = data => {
   const headendSeries = headendChart.series.push(new am4charts.PieSeries());
   headendSeries.dataFields.value = 'value';
   headendSeries.dataFields.category = 'name';
+  const headendTitle = headendChart.titles.create();
+  headendTitle.text = 'Device Counts (Parent Devices)';
+  headendTitle.fontSize = 20;
+  headendTitle.marginBottom = 0;
   headendChart.legend = new am4charts.Legend();
 
   // make the "Device Counts" charts for ACS/VMS Field
@@ -696,5 +768,9 @@ const makeDeviceCountChart = data => {
   const fieldSeries = fieldChart.series.push(new am4charts.PieSeries());
   fieldSeries.dataFields.value = 'value';
   fieldSeries.dataFields.category = 'name';
+  const fieldTitle = fieldChart.titles.create();
+  fieldTitle.text = 'Device Counts (Child Devices)';
+  fieldTitle.fontSize = 20;
+  fieldTitle.marginBottom = 0;
   fieldChart.legend = new am4charts.Legend();
 };

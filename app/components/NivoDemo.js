@@ -9,6 +9,9 @@ import $ from 'jquery';
 
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
+import am4themes_animated from '@amcharts/amcharts4/themes/animated';
+import am4themes_dataviz from '@amcharts/amcharts4/themes/dataviz';
+// import { am4themes_microchart as am4themesMicrochart} from '@amcharts/amcharts4/themes/microchart';
 // import * as am4maps from '@amcharts/amcharts4/maps';
 // import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow';
 import DBQuery from './DBQuery';
@@ -31,13 +34,12 @@ export default class NivoTest extends Component<Props> {
     this.dataTest = await this.testQuery.addConnAlarmCountHour();
     this.dataTestDay = await this.testQuery.addConnAlarmCountDay();
     this.dataTestCounts = await this.testQuery.addConnDeviceCounts();
-    console.log('Query: Device Counts');
-    console.log(this.dataTestCounts);
-    // console.log(this.dataTest.rows);
+    this.dataTestTimezones = await this.testQuery.addConnTimezoneReaderModes();
 
     makeAlarmCountChart(this.dataTest);
     makeAlarmCountDay(this.dataTestDay);
     makeDeviceCountChart(this.dataTestCounts);
+    makeReaderTimezonesTable(this.dataTestTimezones);
   };
 
   render = () => {
@@ -50,6 +52,8 @@ export default class NivoTest extends Component<Props> {
       counter
     } = this.props;
     */
+    am4core.useTheme(am4themes_animated);
+    am4core.useTheme(am4themes_dataviz);
     return (
       <div id="literallyEverything">
         <div id="charts">
@@ -111,61 +115,12 @@ export default class NivoTest extends Component<Props> {
             </div>
           </div>
         </div>
-        <table id="table-id" className="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Office</th>
-              <th>Age</th>
-              <th>Start date</th>
-              <th>Salary</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Tiger Nixon</td>
-              <td>System Architect</td>
-              <td>Edinburgh</td>
-              <td>61</td>
-              <td>2011/04/25</td>
-              <td>$320,800</td>
-            </tr>
-            <tr>
-              <td>Garrett Winters</td>
-              <td>Accountant</td>
-              <td>Tokyo</td>
-              <td>63</td>
-              <td>2011/07/25</td>
-              <td>$170,750</td>
-            </tr>
-            <tr>
-              <td>Ashton Cox</td>
-              <td>Junior Technical Author</td>
-              <td>San Francisco</td>
-              <td>66</td>
-              <td>2009/01/12</td>
-              <td>$86,000</td>
-            </tr>
-            <tr>
-              <td>Cedric Kelly</td>
-              <td>Senior Javascript Developer</td>
-              <td>Edinburgh</td>
-              <td>22</td>
-              <td>2012/03/29</td>
-              <td>$433,060</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Office</th>
-              <th>Age</th>
-              <th>Start date</th>
-              <th>Salary</th>
-            </tr>
-          </tfoot>
+        <table
+          id="readerTimezones"
+          className="table table-striped table-bordered"
+        >
+          <thead />
+          <tbody />
         </table>
       </div>
     );
@@ -294,28 +249,28 @@ const makeAlarmCountChart = data => {
 
   const series2 = alarmCountChart.series.push(new am4charts.LineSeries());
   series2.name = 'Priority 100';
-  series2.stroke = am4core.color('#CDA2AB');
+  // series2.stroke = am4core.color('#CDA2AB');
   series2.strokeWidth = 3;
   series2.dataFields.valueY = 'Alarms3';
   series2.dataFields.dateX = 'Date';
 
   const series3 = alarmCountChart.series.push(new am4charts.LineSeries());
   series3.name = 'Priority 101';
-  series3.stroke = am4core.color('#FF6B9A');
+  // series3.stroke = am4core.color('#FF6B9A');
   series3.strokeWidth = 3;
   series3.dataFields.valueY = 'Alarms';
   series3.dataFields.dateX = 'Date';
 
   const series4 = alarmCountChart.series.push(new am4charts.LineSeries());
   series4.name = 'Priority 102';
-  series4.stroke = am4core.color('#20A33C');
+  // series4.stroke = am4core.color('#20A33C');
   series4.strokeWidth = 3;
   series4.dataFields.valueY = 'Alarms2';
   series4.dataFields.dateX = 'Date';
 
   const series5 = alarmCountChart.series.push(new am4charts.LineSeries());
   series5.name = 'No Priority';
-  series5.stroke = am4core.color('#4853B8');
+  // series5.stroke = am4core.color('#4853B8');
   series5.strokeWidth = 3;
   series5.dataFields.valueY = 'Alarms4';
   series5.dataFields.dateX = 'Date';
@@ -624,70 +579,70 @@ const makeAlarmCountDay = data => {
 
   const series2 = alarmCountChart.series.push(new am4charts.LineSeries());
   series2.name = 'Alarm Active';
-  series2.stroke = am4core.color('#F44336');
+  // series2.stroke = am4core.color('#F44336');
   series2.strokeWidth = 3;
   series2.dataFields.valueY = 'AlAct';
   series2.dataFields.dateX = 'Date';
 
   const series3 = alarmCountChart.series.push(new am4charts.LineSeries());
   series3.name = 'Communications Lost';
-  series3.stroke = am4core.color('#E91E63');
+  // series3.stroke = am4core.color('#E91E63');
   series3.strokeWidth = 3;
   series3.dataFields.valueY = 'CommLost';
   series3.dataFields.dateX = 'Date';
 
   const series4 = alarmCountChart.series.push(new am4charts.LineSeries());
   series4.name = 'Communications Restored';
-  series4.stroke = am4core.color('#9C27b0');
+  // series4.stroke = am4core.color('#9C27b0');
   series4.strokeWidth = 3;
   series4.dataFields.valueY = 'CommRes';
   series4.dataFields.dateX = 'Date';
 
   const series5 = alarmCountChart.series.push(new am4charts.LineSeries());
   series5.name = 'Communications With Host Lost';
-  series5.stroke = am4core.color('#673AB7');
+  // series5.stroke = am4core.color('#673AB7');
   series5.strokeWidth = 3;
   series5.dataFields.valueY = 'CommHLost';
   series5.dataFields.dateX = 'Date';
 
   const series6 = alarmCountChart.series.push(new am4charts.LineSeries());
   series6.name = 'Communications With Host Restored';
-  series6.stroke = am4core.color('#3F51B5');
+  // series6.stroke = am4core.color('#3F51B5');
   series6.strokeWidth = 3;
   series6.dataFields.valueY = 'CommHLRes';
   series6.dataFields.dateX = 'Date';
 
   const series7 = alarmCountChart.series.push(new am4charts.LineSeries());
   series7.name = 'Door Forced Open';
-  series7.stroke = am4core.color('#2196F3');
+  // series7.stroke = am4core.color('#2196F3');
   series7.strokeWidth = 3;
   series7.dataFields.valueY = 'DFO';
   series7.dataFields.dateX = 'Date';
 
   const series8 = alarmCountChart.series.push(new am4charts.LineSeries());
   series8.name = 'Door Held Open';
-  series8.stroke = am4core.color('#03A9F4');
+  // series8.stroke = am4core.color('#03A9F4');
   series8.strokeWidth = 3;
   series8.dataFields.valueY = 'DHO';
   series8.dataFields.dateX = 'Date';
 
   const series9 = alarmCountChart.series.push(new am4charts.LineSeries());
   series9.name = 'Invalid Access Level';
-  series9.stroke = am4core.color('#00BCD4');
+  // series9.stroke = am4core.color('#00BCD4');
   series9.strokeWidth = 3;
   series9.dataFields.valueY = 'IAL';
   series9.dataFields.dateX = 'Date';
 
   const series10 = alarmCountChart.series.push(new am4charts.LineSeries());
   series10.name = 'Invalid Badge';
-  series10.stroke = am4core.color('#008856');
+  // series10.stroke = am4core.color('#008856');
   series10.strokeWidth = 3;
   series10.dataFields.valueY = 'IB';
   series10.dataFields.dateX = 'Date';
 
   const series11 = alarmCountChart.series.push(new am4charts.LineSeries());
   series11.name = 'Other Alarm';
-  series11.stroke = am4core.color('#F38400');
+  // series11.stroke = am4core.color('#F38400');
   series11.strokeWidth = 3;
   series11.dataFields.valueY = 'Other';
   series11.dataFields.dateX = 'Date';
@@ -773,4 +728,13 @@ const makeDeviceCountChart = data => {
   fieldTitle.fontSize = 20;
   fieldTitle.marginBottom = 0;
   fieldChart.legend = new am4charts.Legend();
+};
+
+const makeReaderTimezonesTable = data => {
+  $('#readerTimezones').DataTable({
+    data: data.rows,
+    columns: data.columns.map(col => {
+      return { title: col.name };
+    })
+  });
 };

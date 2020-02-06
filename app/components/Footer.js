@@ -34,20 +34,20 @@ export default class Footer extends Component<Props> {
           <div className="row">
             <div className="col">
               <ul className="contact-list">
-                Report bugs:
-                <li>
+                <p> Report bugs: </p>
+                <p>
                   <a
                     className="u-email"
                     href="mailto:sloane@northlandcontrols.com"
                   >
                     sloane@northlandcontrols.com
                   </a>
-                </li>
-                <li>
+                </p>
+                <p>
                   <a href="https://github.com/LoaneShark/PS-Dashboard/issues">
                     GitHub Issues Tracker
                   </a>
-                </li>
+                </p>
               </ul>
             </div>
           </div>

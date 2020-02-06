@@ -49,9 +49,6 @@ const pageChartsTest = function pageChartsTest() {
   const nivoBox = new NivoTest();
   render(nivoBox.render(), document.getElementById('content'));
   nivoBox.chartrender();
-  $(document).ready(() => {
-    $('#table-id').DataTable();
-  });
 };
 
 /*

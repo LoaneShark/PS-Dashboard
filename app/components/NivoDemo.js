@@ -60,11 +60,7 @@ export default class NivoTest extends Component<Props> {
           <div id="chartdiv4" style={{ width: '900px', height: '800px' }} />
           <div id="chartdiv5" style={{ width: '900px', height: '800px' }} />
         </div>
-        <table
-          id="table-id"
-          className="table table-striped table-bordered"
-          containerStyle="width:100%"
-        >
+        <table id="table-id" className="table table-striped table-bordered">
           <thead>
             <tr>
               <th>Name</th>

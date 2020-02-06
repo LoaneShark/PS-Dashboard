@@ -1,7 +1,7 @@
 // @flow
 // import $ from 'jquery';
 import React, { Component } from 'react';
-// import { DataTable } from 'datatables.net';
+import 'datatables.net';
 import 'datatables.net-bs4';
 import { render } from 'react-dom';
 import $ from 'jquery';

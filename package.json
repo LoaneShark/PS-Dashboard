@@ -60,6 +60,7 @@
     "productName": "PS-Dashboard",
     "appId": "org.develar.PS-Dashboard",
     "files": [
+      "bin/",
       "dist/",
       "node_modules/",
       "app.html",

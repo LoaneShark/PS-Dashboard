@@ -113,6 +113,13 @@ export default class NivoTest extends Component<Props> {
                 />
               </div>
             </div>
+            <div className="row">
+              <div className="col-12">
+                <h1 style={{ fontSize: '27px', marginTop: '20px' }}>
+                  Active Timezones
+                </h1>
+              </div>
+            </div>
           </div>
         </div>
         <table

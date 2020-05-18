@@ -1,0 +1,8 @@
+version: 0.4.0
+files:
+  - url: PS-Dashboard-Setup-0.4.0.exe
+    sha512: kUfltYBx7QQIlROMagCfypAFuho4t55DQj8FHqrBrAZdD4PyNWsmed/4fAREsgujKZzZEzRgleGF0KgeN7Ay0Q==
+    size: 47126389
+path: PS-Dashboard-Setup-0.4.0.exe
+sha512: kUfltYBx7QQIlROMagCfypAFuho4t55DQj8FHqrBrAZdD4PyNWsmed/4fAREsgujKZzZEzRgleGF0KgeN7Ay0Q==
+releaseDate: '2020-05-18T18:09:20.110Z'

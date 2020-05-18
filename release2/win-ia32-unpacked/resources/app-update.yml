@@ -1,0 +1,5 @@
+owner: LoaneShark
+repo: PS-Dashboard
+provider: github
+private: false
+updaterCacheDirName: ncs-ps-dashboard-updater

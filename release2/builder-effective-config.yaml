@@ -1,0 +1,64 @@
+directories:
+  output: release
+  buildResources: resources
+productName: PS-Dashboard
+appId: org.develar.PS-Dashboard
+asar: true
+files:
+  - filter:
+      - bin/
+      - actions/
+      - config/
+      - containers/
+      - reducers/
+      - src/sysadmin/
+      - .static/css/
+      - .static/html/
+      - .static/img/
+      - .static/js/
+      - .static/php/
+      - src/.static/css/
+      - src/.static/html/
+      - src/.static/img/
+      - src/.static/js/
+      - src/.static/php/
+      - bin/sqlserverv8*.node
+      - components/
+      - components/footer.html
+      - components/login.html
+      - components/navigation.html
+      - components/navigation.js
+      - dist/
+      - node_modules/
+      - src/
+      - utils/
+      - app.html
+      - main.dev.js
+      - main.prod.js
+      - main.prod.js.map
+      - package.json
+dmg:
+  contents:
+    - x: 130
+      'y': 220
+    - x: 410
+      'y': 220
+      type: link
+      path: /Applications
+win:
+  target:
+    - nsis
+    - msi
+    - portable
+linux:
+  target:
+    - deb
+    - rpm
+    - AppImage
+  category: Development
+publish:
+  provider: github
+  owner: LoaneShark
+  repo: PS-Dashboard
+  private: false
+electronVersion: 7.1.4

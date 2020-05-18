@@ -1,7 +1,7 @@
 {
-  "name": "PS-Dashboard",
-  "productName": "PS-Dashboard",
-  "version": "0.18.1",
+  "name": "NCS-PS-Dashboard",
+  "productName": "NCS PS-Dashboard",
+  "version": "0.4.0",
   "description": "Professional Services dashboard for ACS systems",
   "main": "./main.prod.js",
   "author": {
